@@ -1,9 +1,9 @@
 obtenerPosicionOutcome <- function(outcome) {
-    HEART_ATTACK <- list("heart attack", 31)
+    HEART_ATTACK <- list("heart attack", 13)
     
     HEART_FAILURE <- list("heart failure", 19)
     
-    PNEUOMONIA <- list("pneumonia", 43)
+    PNEUOMONIA <- list("pneumonia", 25)
     
     if(identical(HEART_ATTACK[[1]],outcome)) {
         return(HEART_ATTACK[[2]])
@@ -22,7 +22,7 @@ best <- function(state, outcome) {
     posOutcome <- obtenerPosicionOutcome(outcome)
     
     if(is.null(posOutcome)) {
-        print("El parámetro outcome contiene un valor inválido")
+        stop("invalid outcome")
         return
     }
         
@@ -31,7 +31,7 @@ best <- function(state, outcome) {
     estados <- levels(factor(outcome[["State"]]))
     
     if(!is.element(state,estados)) {
-        print("El parámetro estado contiene un valor inválido")
+        stop("invalid state")
     }
     
     filtrado <- subset(outcome, State == state)
